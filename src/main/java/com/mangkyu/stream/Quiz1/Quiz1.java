@@ -33,7 +33,18 @@ public class Quiz1 {
     // 1.3 소개 내용에 '좋아'가 몇번 등장하는지 계산하여라.
     public int quiz3() throws IOException {
         List<String[]> csvLines = readCsvLines();
-        return 0;
+        return csvLines.stream()
+                .map(line -> countLove(line[2].trim()))
+                .reduce(0,Integer::sum);
+    }
+    private int countLove(String intro) {
+        int count = 0;
+        int pos = intro.indexOf("좋아");
+        while(pos != -1) {
+            count++;
+            pos = intro.indexOf("좋아",pos+1);
+        }
+        return count;
     }
 
     private List<String[]> readCsvLines() throws IOException {
