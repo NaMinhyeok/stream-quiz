@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
 
 public class Quiz6 {
 
@@ -44,7 +45,8 @@ public class Quiz6 {
 
     // 각 반별 총점을 학년 별로 나누어 구하여라 (Map<Integer, Map<Integer, Integer>>)
     public Map<Integer, Map<Integer, Integer>> quiz2() {
-        return new HashMap<>();
+        return Arrays.stream(stuArr)
+                .collect(groupingBy((Student::getHak),groupingBy(Student::getBan,summingInt(Student::getScore))));
     }
 
 }
